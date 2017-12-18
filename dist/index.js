@@ -42,8 +42,7 @@ module.exports = (() => {
   var _ref = _asyncToGenerator(function* (_ref2) {
     let url = _ref2.url,
         gotOpts = _ref2.gotOpts,
-        dir = _ref2.dir,
-        name = _ref2.name;
+        dir = _ref2.dir;
 
     var _ref3 = yield _thenTmp2.default.dir();
 
@@ -58,7 +57,12 @@ module.exports = (() => {
     const fromDirname = _ref5[0];
 
     const src = (0, _path.join)(tmpPath, fromDirname);
-    const packageDir = name || (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'package.json'))).name;
+    let packageName;
+    try {
+      packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'package.json'))).name;
+    } catch (e) {
+      packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'bower.json'))).name;
+    }
 
     var _npa = (0, _npmPackageArg2.default)(packageDir);
 
@@ -71,6 +75,7 @@ module.exports = (() => {
     yield (0, _fsExtra.move)(src, dest);
 
     cleanupCallback();
+    return dest;
   });
 
   return function (_x) {
