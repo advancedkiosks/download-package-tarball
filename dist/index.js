@@ -57,12 +57,13 @@ module.exports = (() => {
     const fromDirname = _ref5[0];
 
     const src = (0, _path.join)(tmpPath, fromDirname);
-    let packageName;
+    let manifest;
     try {
-      packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'bower.json'))).name;
+      manifest = yield (0, _thenReadJson2.default)((0, _path.join)(src, 'bower.json'));
     } catch (e) {
-      packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'package.json'))).name;
+      manifest = yield (0, _thenReadJson2.default)((0, _path.join)(src, 'package.json'));
     }
+    const packageName = manifest.name.toLowerCase();
 
     var _npa = (0, _npmPackageArg2.default)(packageName);
 
