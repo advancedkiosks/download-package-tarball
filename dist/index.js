@@ -59,9 +59,9 @@ module.exports = (() => {
     const src = (0, _path.join)(tmpPath, fromDirname);
     let packageName;
     try {
-      packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'package.json'))).name;
-    } catch (e) {
       packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'bower.json'))).name;
+    } catch (e) {
+      packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'package.json'))).name;
     }
 
     var _npa = (0, _npmPackageArg2.default)(packageDir);
