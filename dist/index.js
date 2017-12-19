@@ -64,11 +64,11 @@ module.exports = (() => {
       packageName = (yield (0, _thenReadJson2.default)((0, _path.join)(src, 'package.json'))).name;
     }
 
-    var _npa = (0, _npmPackageArg2.default)(packageDir);
+    var _npa = (0, _npmPackageArg2.default)(packageName);
 
     const scope = _npa.scope;
 
-    const dest = (0, _path.join)(dir, packageDir);
+    const dest = (0, _path.join)(dir, packageName);
 
     yield makeParentDir(dir, scope);
     yield (0, _rimrafThen2.default)(dest);
